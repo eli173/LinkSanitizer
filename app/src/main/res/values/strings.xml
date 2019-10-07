@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Link Sanitizer</string>
+    <string name="info">cleans up your links!</string>
+    <string name="buttontxt">Set as default browser</string>
+</resources>
