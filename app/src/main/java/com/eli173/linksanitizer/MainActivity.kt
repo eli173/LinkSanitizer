@@ -11,6 +11,8 @@ import android.view.View
 import android.widget.RadioButton
 import android.widget.RadioGroup
 
+val TAG: String = "LinkSanitizer"
+
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,12 +52,6 @@ class MainActivity : AppCompatActivity() {
 
     fun promptDefault(view: View) {
         val defIntent = Intent(android.provider.Settings.ACTION_SETTINGS)
-        Log.d("173","prompt default reached")
         startActivityForResult(defIntent, 0)
-        /*
-        Log.d("173",defIntent.resolveActivity(packageManager).toString())
-        if(defIntent.resolveActivity(packageManager) != null) {
-            startActivity(defIntent)
-        }*/
     }
 }

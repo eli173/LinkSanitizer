@@ -12,18 +12,23 @@ class SanitizeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        Log.d("173", intent.dataString)
-
         val uri = intent.data
 
+        Log.i(TAG, "Received URL ${uri.toString()}")
 
-        val h = RedirectHandler(uri, ::openUri)
-        h.execute(uri)
+        val fin = FinalHandler(::openUri)
+        val red2 = RedirectHandler(fin)
+        val fh = FirstHandler(uri, red2)
+
+        fh.execute()
+
+        //val h = RedirectHandler(uri, ::openUri)
+        //h.execute()
 
     }
 
     fun openUri(uri: Uri) {
-        Log.d("173",uri.toString())
+        Log.i(TAG,"Opening URL: ${uri.toString()}")
         val prefs = getSharedPreferences(getString(R.string.prefs_key), Context.MODE_PRIVATE)
         val defaultBrowserPkg = prefs.getString("browser","")
 
