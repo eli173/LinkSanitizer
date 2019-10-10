@@ -17,17 +17,13 @@ class SanitizeActivity : AppCompatActivity() {
         val uri = intent.data
 
 
-        // cleaning here? okay
-        val cleaner = Cleaner(uri, this, this::openURL)
-        cleaner.getHeader()
-        Log.d("173","uh oh...")
-
-
+        val h = RedirectHandler(uri, ::openUri)
+        h.execute(uri)
 
     }
 
-    fun openURL(uri: Uri) {
-        Log.d("173","ok tf is this")
+    fun openUri(uri: Uri) {
+        Log.d("173",uri.toString())
         val prefs = getSharedPreferences(getString(R.string.prefs_key), Context.MODE_PRIVATE)
         val defaultBrowserPkg = prefs.getString("browser","")
 
@@ -40,7 +36,7 @@ class SanitizeActivity : AppCompatActivity() {
                 startActivity(browseIntent)
             }
         }
-
+        this.finish()
     }
 
 }

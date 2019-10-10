@@ -20,7 +20,6 @@ class MainActivity : AppCompatActivity() {
         val browserFinderIntent = Intent(Intent.ACTION_VIEW, sampleUri)
 
         var browsers = packageManager.queryIntentActivities(browserFinderIntent, PackageManager.MATCH_ALL)
-        Log.d("173", browsers.map{ x -> x.activityInfo.packageName}.toString())
         browsers = browsers.filter { b -> b.activityInfo.packageName != "com.eli173.linksanitizer" }
 
         setContentView(R.layout.activity_main)
@@ -38,7 +37,6 @@ class MainActivity : AppCompatActivity() {
             button.setOnCheckedChangeListener { buttonView, isChecked ->
                 if (isChecked) {
                     val x = b.activityInfo.packageName
-                    Log.d("173", "found the button listener for $x")
                     with(prefs.edit()) {
                         putString("browser", x)
                         commit()
