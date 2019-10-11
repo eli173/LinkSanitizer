@@ -9,7 +9,6 @@ import android.util.Log
 class FirstHandler(val uri: Uri, val nextHandler: UriHandler): AsyncTask<Uri, Unit, Uri>() {
 
     override fun doInBackground(vararg params: Uri): Uri {
-        Log.d("173", "starting fh2")
         return uri
     }
 
@@ -21,7 +20,6 @@ class FirstHandler(val uri: Uri, val nextHandler: UriHandler): AsyncTask<Uri, Un
 
 class FinalHandler(val opener: (Uri)->Unit): UriHandler(null) {
     override fun backgroundTask(uri: Uri): Uri {
-        Log.d("173", "made it to the end")
         opener(uri)
         return uri
     }

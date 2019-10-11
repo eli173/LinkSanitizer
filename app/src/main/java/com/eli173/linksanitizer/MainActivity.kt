@@ -32,9 +32,6 @@ class MainActivity : AppCompatActivity() {
         val rg = findViewById<RadioGroup>(R.id.radiogrp)
         for (b in browsers) {
             val button = RadioButton(this)
-            if(b.activityInfo.packageName == prefs.getString("browser", "")) {
-                button.toggle()
-            }
             button.text = b.activityInfo.packageName
             button.setOnCheckedChangeListener { buttonView, isChecked ->
                 if (isChecked) {
@@ -46,6 +43,10 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             rg.addView(button)
+            if(b.activityInfo.packageName == prefs.getString("browser", "")) {
+                rg.check(button.id)
+            }
+
         }
 
     }

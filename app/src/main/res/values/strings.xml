@@ -4,4 +4,5 @@
     <string name="buttontxt">Set as default browser</string>
     <string name="choose_browser">Open with</string>
     <string name="prefs_key">com.eli173.linksanitizer.prefs</string>
+    <string name="sanitize_text">Sanitizing your link…</string>
 </resources>
