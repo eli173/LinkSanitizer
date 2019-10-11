@@ -1,10 +1,9 @@
 package com.eli173.linksanitizer
 
 import android.net.Uri
-import android.os.AsyncTask
 import android.util.Log
+import java.net.HttpURLConnection
 import java.net.URL
-import javax.net.ssl.HttpsURLConnection
 
 
 class RedirectHandler(nextHandler: UriHandler): UriHandler(nextHandler) {
@@ -12,7 +11,7 @@ class RedirectHandler(nextHandler: UriHandler): UriHandler(nextHandler) {
         var newuri = uri
         do {
             val url = URL(newuri.toString())
-            val conn = url.openConnection() as HttpsURLConnection
+            val conn = url.openConnection() as HttpURLConnection
             conn.requestMethod = "HEAD"
             conn.instanceFollowRedirects = false
             conn.connect()
