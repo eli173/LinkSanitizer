@@ -7,8 +7,7 @@ import java.net.URL
 import javax.net.ssl.HttpsURLConnection
 
 
-class RedirectHandler(nextHandler: UriHandler): UriHandler(nextHandler)
-{
+class RedirectHandler(nextHandler: UriHandler): UriHandler(nextHandler) {
     override fun backgroundTask(uri: Uri): Uri {
         var newuri = uri
         do {

@@ -18,7 +18,8 @@ class SanitizeActivity : AppCompatActivity() {
 
         // PUT YOUR NEW SUBCLASSES SOMEWHERE DOWN HERE
         val fin = FinalHandler(::openUri)
-        val red = RedirectHandler(fin)
+        val amp = AMPHandler(fin)
+        val red = RedirectHandler(amp)
         val fh = FirstHandler(uri, red)
 
         fh.execute()

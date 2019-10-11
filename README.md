@@ -39,3 +39,6 @@ and make sure your constructor takes the variable above it as an argument
 and that the constructor below yours takes your class as its argument.
 Note that the closer your class is to `FirstHandler`, the sooner it will be called.
 In the (near) future I would like to clean this up and make it even easier to interact with.
+
+Please note that I have generally employed logging such that a report is made whenever the Uri is changed,
+so that the changes made as the UriHandlers operate are clear to anyone working on something new.
