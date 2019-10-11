@@ -16,14 +16,12 @@ class SanitizeActivity : AppCompatActivity() {
 
         Log.i(TAG, "Received URL ${uri.toString()}")
 
+        // PUT YOUR NEW SUBCLASSES SOMEWHERE DOWN HERE
         val fin = FinalHandler(::openUri)
-        val red2 = RedirectHandler(fin)
-        val fh = FirstHandler(uri, red2)
+        val red = RedirectHandler(fin)
+        val fh = FirstHandler(uri, red)
 
         fh.execute()
-
-        //val h = RedirectHandler(uri, ::openUri)
-        //h.execute()
 
     }
 
@@ -32,9 +30,8 @@ class SanitizeActivity : AppCompatActivity() {
         val prefs = getSharedPreferences(getString(R.string.prefs_key), Context.MODE_PRIVATE)
         val defaultBrowserPkg = prefs.getString("browser","")
 
-        // TODO: check for installs, do something when default isn't selected
+        // TODO: check for installs, do something when default isn't selected, make this pretty
         if (defaultBrowserPkg != "") {
-            // it's well-defined and should work, if it's still installed
             val browseIntent = Intent(Intent.ACTION_VIEW, uri)
             browseIntent.setPackage(defaultBrowserPkg)
             if(browseIntent.resolveActivity(packageManager) != null) {
