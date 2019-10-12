@@ -17,8 +17,9 @@ dodges tracking where it can, and generally tries to make the links you come acr
 
 ## Installation
 
-I haven't built an APK for you to use yet, so at this point you'll have to compile it yourself.
-I don't anticipate that to be terribly difficult if this repository is imported into Android Studio.
+Building this from Android Studio is hopefully very straightforward, but I've also provided an APK
+on [my website](https://prog.eli173.com/linksanitizer/) for convenience
+until I get this app on F-Droid and/or the Play Store.
 
 ## Development
 
