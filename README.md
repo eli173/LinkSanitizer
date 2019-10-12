@@ -2,7 +2,7 @@
 
 ## About
 
-A small Android application to clean up links you click on in other apps.
+A small, open-source (GPLv3) Android application to clean up links you click on in other apps.
 
 I decided to write this app when I noticed a variety of useless links appearing in my browser history.
 By 'useless links', I mean things like links to URL shorteners, amp links, tracking links, and so forth.
