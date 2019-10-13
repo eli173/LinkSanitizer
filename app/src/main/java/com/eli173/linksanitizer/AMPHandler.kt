@@ -1,8 +1,10 @@
 package com.eli173.linksanitizer
 
 import android.net.Uri
+import android.widget.TextView
 
-class AMPHandler(nextHandler: UriHandler): UriHandler(nextHandler) {
+class AMPHandler(nextHandler: UriHandler, textView: TextView): UriHandler(nextHandler, textView) {
+    override val classString = "AMP Handler"
     override fun backgroundTask(uri: Uri): Uri {
         val googViewerPrefix = "https://www.google.com/amp/"
         if(uri.toString().startsWith(googViewerPrefix)) {

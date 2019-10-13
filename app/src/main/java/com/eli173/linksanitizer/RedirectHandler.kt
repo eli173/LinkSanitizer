@@ -2,11 +2,13 @@ package com.eli173.linksanitizer
 
 import android.net.Uri
 import android.util.Log
+import android.widget.TextView
 import java.net.HttpURLConnection
 import java.net.URL
 
 
-class RedirectHandler(nextHandler: UriHandler): UriHandler(nextHandler) {
+class RedirectHandler(nextHandler: UriHandler, textView: TextView): UriHandler(nextHandler, textView) {
+    override val classString = "Redirect Handler"
     override fun backgroundTask(uri: Uri): Uri {
         var newuri = uri
         do {

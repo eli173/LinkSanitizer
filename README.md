@@ -32,7 +32,8 @@ You can do anything you'd like in this method, though I anticipate one will typi
 simple string transformations on the `Uri`s or make simple HTTP requests.
 Both of these are done in existing subclasses, so take a peek for inspiration.
 
-Once you've made your subclass, all you have to do is insert it into the processing queue.
+Once you've made your subclass, all you have to do is pick an identifying `classString` 
+and insert your class into the processing queue.
 At the moment, you'll have to find this queue in the `SanitizeActivity.kt` file,
 sandwiched between the `FirstHandler` and the `FinalHandler`.
 Just place your class in a variable between those,
@@ -43,3 +44,5 @@ In the (near) future I would like to clean this up and make it even easier to in
 
 Please note that I have generally employed logging such that a report is made whenever the Uri is changed,
 so that the changes made as the UriHandlers operate are clear to anyone working on something new.
+Feel free to use logging however you like,
+but keep in mind any information that might be useful for other developers.

@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.widget.TextView
 
 class SanitizeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,14 +18,20 @@ class SanitizeActivity : AppCompatActivity() {
 
         Log.i(TAG, "Received URL ${uri.toString()}")
 
+        val outputTextView = findViewById<TextView>(R.id.results)
+        outputTextView.append("Starting URL: ${uri.toString()}")
+
         // PUT YOUR NEW SUBCLASSES SOMEWHERE DOWN HERE
-        val fin = FinalHandler(::openUri)
-        val amp = AMPHandler(fin)
-        val red = RedirectHandler(amp)
+        val fin = FinalHandler(::openUri, outputTextView)
+        val amp = AMPHandler(fin, outputTextView)
+        val red = RedirectHandler(amp, outputTextView)
         val fh = FirstHandler(uri, red)
-
-        fh.execute()
-
+        try {
+            fh.execute()
+        }
+        catch (e: Exception) {
+            openUri(uri)
+        }
     }
 
     fun openUri(uri: Uri) {

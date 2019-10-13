@@ -3,7 +3,7 @@ package com.eli173.linksanitizer
 import android.net.Uri
 import android.os.AsyncTask
 import android.util.Log
-
+import android.widget.TextView
 
 
 class FirstHandler(val uri: Uri, val nextHandler: UriHandler): AsyncTask<Uri, Unit, Uri>() {
@@ -18,7 +18,8 @@ class FirstHandler(val uri: Uri, val nextHandler: UriHandler): AsyncTask<Uri, Un
 
 }
 
-class FinalHandler(val opener: (Uri)->Unit): UriHandler(null) {
+class FinalHandler(val opener: (Uri)->Unit, textView: TextView): UriHandler(null, textView) {
+    override val classString = "Finally"
     override fun backgroundTask(uri: Uri): Uri {
         opener(uri)
         return uri
