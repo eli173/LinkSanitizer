@@ -1,5 +1,9 @@
 # Link Sanitizer
 
+## Important
+
+Please note that the main development takes place on GitLab [here](https://gitlab.com/eli173/linksanitizer), and this repository is just a mirror. I would appreciate if comments, bug reports, and suggestions were submitted there rather than here.
+
 ## About
 
 A small, open-source (GPLv3) Android application to clean up links you click on in other apps.
