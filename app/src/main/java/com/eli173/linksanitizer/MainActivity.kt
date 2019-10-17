@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.View
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import android.widget.Switch
 
 val TAG: String = "LinkSanitizer"
 
@@ -27,7 +28,22 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val prefs = getSharedPreferences(getString(R.string.prefs_key), Context.MODE_PRIVATE)
-        prefs.contains("browser")
+
+        if(!prefs.contains("viewswitch")) {
+            with(prefs.edit()) {
+                putBoolean("viewswitch", false)
+                commit()
+            }
+        }
+
+        val sw = findViewById<Switch>(R.id.viewswitch)
+        sw.setChecked(prefs.getBoolean("viewswitch",false))
+        sw.setOnCheckedChangeListener { buttonView, isChecked ->
+            with(prefs.edit()) {
+                putBoolean("viewswitch", isChecked)
+                commit()
+            }
+        }
 
         val rg = findViewById<RadioGroup>(R.id.radiogrp)
         for (b in browsers) {
