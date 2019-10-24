@@ -12,7 +12,7 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Switch
 
-val TAG: String = "LinkSanitizer"
+const val TAG: String = "LinkSanitizer"
 
 class MainActivity : AppCompatActivity() {
 
@@ -37,8 +37,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         val sw = findViewById<Switch>(R.id.viewswitch)
-        sw.setChecked(prefs.getBoolean("viewswitch",false))
-        sw.setOnCheckedChangeListener { buttonView, isChecked ->
+        sw.isChecked = prefs.getBoolean("viewswitch",false)
+        sw.setOnCheckedChangeListener { _, isChecked ->
             with(prefs.edit()) {
                 putBoolean("viewswitch", isChecked)
                 commit()
@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         for (b in browsers) {
             val button = RadioButton(this)
             button.text = b.activityInfo.packageName
-            button.setOnCheckedChangeListener { buttonView, isChecked ->
+            button.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
                     val x = b.activityInfo.packageName
                     with(prefs.edit()) {

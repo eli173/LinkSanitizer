@@ -13,7 +13,7 @@ abstract class UriHandler(val nextHandler: UriHandler?, val textView: TextView):
         return backgroundTask(params.get(0))
     }
 
-    final override fun onPostExecute(result: Uri) {
+    override fun onPostExecute(result: Uri) {
         textView.append("\n${classString}: ${result.toString()}")
         nextHandler?.execute(result)
     }

@@ -21,7 +21,10 @@ class FirstHandler(val uri: Uri, val nextHandler: UriHandler): AsyncTask<Uri, Un
 class FinalHandler(val opener: (Uri)->Unit, textView: TextView): UriHandler(null, textView) {
     override val classString = "Finally"
     override fun backgroundTask(uri: Uri): Uri {
-        opener(uri)
+        //opener(uri)
         return uri
+    }
+    override fun onPostExecute(result: Uri) {
+        opener(result)
     }
 }

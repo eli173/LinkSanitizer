@@ -6,9 +6,12 @@ import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.View
+import android.widget.Button
 import android.widget.TextView
 
 class SanitizeActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -39,7 +42,9 @@ class SanitizeActivity : AppCompatActivity() {
     }
 
     fun justLook(uri:Uri) {
-        Log.i(TAG, "Final URL: ${uri.toString()}")
+        val button = findViewById<Button>(R.id.gobutton)
+        button.visibility = View.VISIBLE
+        button.setOnClickListener { v -> openUri(uri) }
         return
     }
     fun openUri(uri: Uri) {

@@ -5,7 +5,8 @@
     <string name="choose_browser">Open with</string>
     <string name="prefs_key">com.eli173.linksanitizer.prefs</string>
     <string name="sanitize_text">Sanitizing your link…</string>
-    <string name="view_switch">Just watch the process</string>
+    <string name="view_switch">Don\'t automatically follow</string>
     <string name="below_switch">(usually for testing)</string>
     <string name="settings_reason">(to set as your default browser)</string>
+    <string name="go">go</string>
 </resources>
