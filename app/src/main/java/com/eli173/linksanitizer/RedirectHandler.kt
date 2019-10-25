@@ -12,21 +12,25 @@ class RedirectHandler(nextHandler: UriHandler, textView: TextView): UriHandler(n
     override fun backgroundTask(uri: Uri): Uri {
         var newuri = uri
         do {
+            Log.d(TAG, "RedirectHandler: ${newuri.toString()}")
             val url = URL(newuri.toString())
             val conn = url.openConnection() as HttpURLConnection
             conn.requestMethod = "HEAD"
             conn.instanceFollowRedirects = false
             conn.connect()
             val code = conn.responseCode
-            newuri = when (code) {
-                // I don't have a good enough understanding of 1xx or 2xx codes yet
-                // 4xx and 5xx codes I will just pass on to the browser to show the user the error
-                // so I'm left with the 3xx codes to sort through and figure out
-                // 300 I want to let the browser decide
-                // looks like 301 and 308 are the only ones I want to take action on right now
-                301 -> Uri.parse(conn.getHeaderField("location"))
-                308 -> Uri.parse(conn.getHeaderField("location"))
-                else -> newuri
+            Log.d(TAG, code.toString())
+            if((code == 301) or (code == 308)) {
+                val location = conn.getHeaderField("location")
+                Log.d(TAG, location)
+                // this if statement is meant to handle redirects that give relative locations
+                if(location[0] == '/') {
+                    newuri = Uri.parse(newuri.scheme + "://" + newuri.authority + location)
+                    Log.d(TAG, "bs " + newuri.toString())
+                }
+                else {
+                    newuri = Uri.parse(location)
+                }
             }
         } while ((code == 301) or (code == 308))
         if(newuri != uri) {

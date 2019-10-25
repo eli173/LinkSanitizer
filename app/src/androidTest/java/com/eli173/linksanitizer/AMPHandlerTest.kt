@@ -34,7 +34,7 @@ class AMPHandlerTest {
         assertEquals(bareDestUri, bareResult)
         // testing google viewer links
         val viewerUri = Uri.parse("https://www.google.com/amp/www.example.com/amp.doc.html")
-        val expectedUri = Uri.parse("www.example.com/amp.doc.html")
+        val expectedUri = Uri.parse("https://www.example.com/amp.doc.html")
         val viewerResult = ah.backgroundTask(viewerUri)
         assertEquals(expectedUri, viewerResult)
     }

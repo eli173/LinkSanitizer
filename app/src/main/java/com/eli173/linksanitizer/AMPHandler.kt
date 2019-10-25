@@ -14,7 +14,7 @@ class AMPHandler(nextHandler: UriHandler, textView: TextView): UriHandler(nextHa
             * as in I don't know whether SSL/TLS is used or not...
             * Google doesn't exactly provide the clearest info on this
             * */
-            return Uri.parse(uri.toString().substringAfter(googViewerPrefix))
+            return Uri.parse("https://" + uri.toString().substringAfter(googViewerPrefix))
         }
         // cache urls
         val ampCdn = "cdn.ampproject.org"
