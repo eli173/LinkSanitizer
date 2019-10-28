@@ -1,13 +1,13 @@
 package com.eli173.linksanitizer
 
-import android.net.Uri
 import android.os.AsyncTask
 import android.widget.TextView
 import java.lang.ref.WeakReference
+import java.net.URL
 
-abstract class UriHandler(private val nextHandler: UriHandler?, textView: TextView): AsyncTask<Uri, Unit, Uri>() {
+abstract class URLHandler(private val nextHandler: URLHandler?, textView: TextView): AsyncTask<URL, Unit, URL>() {
     abstract val classString: String
-    abstract fun backgroundTask(uri: Uri): Uri
+    abstract fun backgroundTask(url: URL): URL
 
     private val tv = WeakReference<TextView>(textView)
 
@@ -16,12 +16,12 @@ abstract class UriHandler(private val nextHandler: UriHandler?, textView: TextVi
 
     }
 
-    final override fun doInBackground(vararg params: Uri): Uri {
+    final override fun doInBackground(vararg params: URL): URL {
         return backgroundTask(params[0])
     }
 
-    override fun onPostExecute(result: Uri) {
-        tv.get()?.append("\n${classString}: ${result}")
+    override fun onPostExecute(result: URL) {
+        tv.get()?.append("\n$classString: $result")
         nextHandler?.execute(result)
     }
 

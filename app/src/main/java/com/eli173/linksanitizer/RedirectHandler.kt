@@ -1,20 +1,18 @@
 package com.eli173.linksanitizer
 
-import android.net.Uri
 import android.util.Log
 import android.widget.TextView
 import java.net.HttpURLConnection
 import java.net.URL
 
 
-class RedirectHandler(nextHandler: UriHandler, textView: TextView): UriHandler(nextHandler, textView) {
+class RedirectHandler(nextHandler: URLHandler, textView: TextView): URLHandler(nextHandler, textView) {
     override val classString = "Redirect Handler"
-    override fun backgroundTask(uri: Uri): Uri {
-        var newuri = uri
+    override fun backgroundTask(url: URL): URL {
+        var newurl = url
         do {
-            Log.d(TAG, "RedirectHandler: ${newuri.toString()}")
-            val url = URL(newuri.toString())
-            val conn = url.openConnection() as HttpURLConnection
+            //Log.d(TAG, "RedirectHandler: ${newurl.toString()}")
+            val conn = newurl.openConnection() as HttpURLConnection
             conn.requestMethod = "HEAD"
             conn.instanceFollowRedirects = false
             conn.connect()
@@ -25,17 +23,17 @@ class RedirectHandler(nextHandler: UriHandler, textView: TextView): UriHandler(n
                 Log.d(TAG, location)
                 // this if statement is meant to handle redirects that give relative locations
                 if(location[0] == '/') {
-                    newuri = Uri.parse(newuri.scheme + "://" + newuri.authority + location)
-                    Log.d(TAG, "bs " + newuri.toString())
+                    newurl = URL(newurl.protocol + "://" + newurl.authority + location)
+                    Log.d(TAG, "bs $newurl}")
                 }
                 else {
-                    newuri = Uri.parse(location)
+                    newurl = URL(location)
                 }
             }
         } while ((code == 301) or (code == 308))
-        if(newuri != uri) {
-            Log.i(TAG, "Redirected to ${newuri.toString()}")
+        if(newurl != url) {
+            Log.i(TAG, "Redirected to $newurl")
         }
-        return newuri
+        return newurl
     }
 }

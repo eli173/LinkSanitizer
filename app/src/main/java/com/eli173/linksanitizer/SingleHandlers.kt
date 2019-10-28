@@ -1,30 +1,28 @@
 package com.eli173.linksanitizer
 
-import android.net.Uri
 import android.os.AsyncTask
-import android.util.Log
 import android.widget.TextView
+import java.net.URL
 
 
-class FirstHandler(val uri: Uri, val nextHandler: UriHandler): AsyncTask<Uri, Unit, Uri>() {
+class FirstHandler(private val url: URL, private val nextHandler: URLHandler): AsyncTask<URL, Unit, URL>() {
 
-    override fun doInBackground(vararg params: Uri): Uri {
-        return uri
+    override fun doInBackground(vararg params: URL): URL {
+        return url
     }
 
-    override fun onPostExecute(result: Uri) {
+    override fun onPostExecute(result: URL) {
         nextHandler.execute(result)
     }
 
 }
 
-class FinalHandler(val opener: (Uri)->Unit, textView: TextView): UriHandler(null, textView) {
+class FinalHandler(val opener: (URL)->Unit, textView: TextView): URLHandler(null, textView) {
     override val classString = "Finally"
-    override fun backgroundTask(uri: Uri): Uri {
-        //opener(uri)
-        return uri
+    override fun backgroundTask(url: URL): URL {
+        return url
     }
-    override fun onPostExecute(result: Uri) {
+    override fun onPostExecute(result: URL) {
         opener(result)
     }
 }
