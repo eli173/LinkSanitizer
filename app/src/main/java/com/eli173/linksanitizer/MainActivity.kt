@@ -44,10 +44,14 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+
         val rg = findViewById<RadioGroup>(R.id.radiogrp)
         for (b in browsers) {
             val button = RadioButton(this)
-            button.text = b.activityInfo.packageName
+            val pn = b.activityInfo.packageName
+            val pm = packageManager
+            val name = pm.getApplicationLabel(pm.getApplicationInfo(pn, PackageManager.GET_META_DATA)) ?: pn
+            button.text = name
             button.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
                     val x = b.activityInfo.packageName
